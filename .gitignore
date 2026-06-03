@@ -1,0 +1,48 @@
+# Unity generated folders
+/Library/
+/Temp/
+/Logs/
+/obj/
+
+# Build output
+/Builds/
+/BuldWind/
+/Viror VR_BurstDebugInformation_DoNotShip/
+/visor_BackUpThisFolder_ButDontShipItWithYourGame/
+
+# Build artifacts
+*.apk
+*.aab
+*.unitypackage
+*.app
+
+# Visual Studio / Rider generated files
+*.csproj
+*.sln
+*.slnx
+*.suo
+*.user
+*.pidb
+*.userprefs
+/.vs/
+/.idea/
+
+# User-specific Unity settings (local editor preferences)
+/UserSettings/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Crash and debug reports
+sysinfo.txt
+*.stackdump
+
+# Asset Store tools
+/AssetStoreTools/

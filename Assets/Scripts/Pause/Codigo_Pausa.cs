@@ -49,7 +49,15 @@ public class Codigo_Pausa : MonoBehaviour
     private bool TeleportMenuActive = false;
     public void TeleportMenu()
     {
-        _TeleportMenu.SetActive(!TeleportMenuActive);
+        if(TeleportMenuActive == false)
+        {
+            TeleportMenuActive = true;
+        }
+        else if (TeleportMenuActive == true)
+        {
+            TeleportMenuActive = false;
+        }
+        _TeleportMenu.SetActive(TeleportMenuActive);
     }
 
     public void BackToPauseMenu()

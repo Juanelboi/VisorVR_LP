@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Datos de un objeto georreferenciado leídos desde el JSON.
-/// </summary>
+
 [Serializable]
 public class ObjectData
 {
@@ -17,13 +15,10 @@ public class ObjectData
     public SerializableVector3 scale;
     public string tag;
 
-    /// </summary>
     public SerializableVector3 localOffset;
 }
 
-/// <summary>
-/// Vector3 serializable con JsonUtility (no soporta UnityEngine.Vector3 directamente).
-/// </summary>
+
 [Serializable]
 public class SerializableVector3
 {
@@ -34,9 +29,7 @@ public class SerializableVector3
     public Vector3 ToVector3() => new Vector3(x, y, z);
 }
 
-/// <summary>
-/// Contenedor raíz del JSON.
-/// </summary>
+
 [Serializable]
 public class ObjectDataList
 {

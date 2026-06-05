@@ -3,6 +3,7 @@
 /Temp/
 /Logs/
 /obj/
+/.utmp/
 
 # Build output
 /Builds/

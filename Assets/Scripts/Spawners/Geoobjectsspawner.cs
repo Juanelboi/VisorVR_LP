@@ -5,11 +5,6 @@ using CesiumForUnity;
 using Unity.Mathematics;
 using UnityEngine;
 
-/// <summary>
-/// Lee un archivo JSON con coordenadas geográficas y coloca prefabs en el globo de Cesium.
-/// La altura se toma directamente del JSON. Para ajustar la posición vertical usa el campo
-/// "localOffset" en el JSON (metros en espacio local del objeto).
-/// </summary>
 public class GeoObjectSpawner : MonoBehaviour
 {
     [Header("Configuración de archivos")]
@@ -23,14 +18,11 @@ public class GeoObjectSpawner : MonoBehaviour
     [Tooltip("Arrastra aquí el CesiumGeoreference de la escena")]
     public CesiumGeoreference georeference;
 
-    // Registro interno: id → GameObject instanciado
     private Dictionary<string, GameObject> spawnedObjects = new Dictionary<string, GameObject>();
 
-    // ─── Ciclo de vida ───────────────────────────────────────────────────────
 
     private IEnumerator Start()
     {
-        // Esperar un frame para que Cesium inicialice sus matrices de transformación
         yield return null;
 
         georeference ??= FindObjectOfType<CesiumGeoreference>();
@@ -44,7 +36,6 @@ public class GeoObjectSpawner : MonoBehaviour
         LoadAndSpawn();
     }
 
-    // ─── Carga y spawn ───────────────────────────────────────────────────────
 
     public void LoadAndSpawn()
     {
@@ -73,7 +64,6 @@ public class GeoObjectSpawner : MonoBehaviour
         Debug.Log($"[GeoObjectSpawner] {spawnedObjects.Count} objetos colocados.");
     }
 
-    // ─── Instanciación individual ────────────────────────────────────────────
 
     private void SpawnObject(ObjectData data)
     {
@@ -85,12 +75,10 @@ public class GeoObjectSpawner : MonoBehaviour
             return;
         }
 
-        // Instanciar en el origen — el anchor corregirá la posición con doble precisión
         GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity, transform);
         go.name = !string.IsNullOrEmpty(data.nombre) ? data.nombre : data.id;
         go.transform.localScale = data.scale.ToVector3();
 
-        // Anchor geográfico con doble precisión
         CesiumGlobeAnchor anchor = go.GetComponent<CesiumGlobeAnchor>()
                                 ?? go.AddComponent<CesiumGlobeAnchor>();
 
@@ -100,9 +88,6 @@ public class GeoObjectSpawner : MonoBehaviour
             data.height
         );
 
-        // Offset local para corregir el pivote del prefab o ajustar la altura.
-        // Se expresa en metros en espacio local (Y = arriba según la superficie del globo).
-        // Si el prefab está bien centrado, deja localOffset en (0, 0, 0) en el JSON.
         if (data.localOffset != null)
         {
             Vector3 offset = data.localOffset.ToVector3();
@@ -110,24 +95,11 @@ public class GeoObjectSpawner : MonoBehaviour
                 go.transform.position += go.transform.TransformDirection(offset);
         }
 
-        // Controlador de parada
         BusStopController controller = go.GetComponent<BusStopController>()
                                     ?? go.AddComponent<BusStopController>();
         controller.Initialize(data);
 
         spawnedObjects[data.id] = go;
-    }
-
-    // ─── Utilidades ──────────────────────────────────────────────────────────
-
-    [ContextMenu("Recargar paradas")]
-    public void Reload()
-    {
-        foreach (var go in spawnedObjects.Values)
-            if (go != null) Destroy(go);
-
-        spawnedObjects.Clear();
-        LoadAndSpawn();
     }
 
     public GameObject GetBusStop(string id) =>

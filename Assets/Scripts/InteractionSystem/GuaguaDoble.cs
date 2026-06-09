@@ -11,7 +11,6 @@ public class GuaguaDoble : MonoBehaviour, IInteractable
     public void Interact(Interactor interactor)
     {
         _guaguaTurista.SetActive(true);
-        interactor.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
     }
 

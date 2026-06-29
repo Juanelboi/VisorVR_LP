@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using CesiumForUnity;
+using TMPro;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class CesiumLoadingScreen : MonoBehaviour
@@ -14,13 +15,13 @@ public class CesiumLoadingScreen : MonoBehaviour
     [SerializeField] private Image artworkImage;
     [SerializeField] private Sprite[] artworks;
     [SerializeField] private Slider progressBar;
-    [SerializeField] private Text tipText;
+    [SerializeField] private TextMeshProUGUI tipText;
     [SerializeField] private string[] tips;
 
     [Header("Ajustes de carga")]
     [SerializeField] private float loadThreshold = 95f;
     [SerializeField] private int stableFramesRequired = 15;
-    [SerializeField] private float timeout = 30f;
+    [SerializeField] private float timeout = 60f;
 
     [Header("Ajustes visuales")]
     [SerializeField] private float secondsPerArtwork = 4f;

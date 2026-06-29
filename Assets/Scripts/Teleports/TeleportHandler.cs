@@ -9,26 +9,6 @@ public class TeleportHandler : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKeyUp(KeyCode.T) && teleportMenu != null)
-        {
-            {
-                if (!isTeleporting)
-                {
-                    if (isTeleporting == false)
-                    {
-                        teleportMenu.SetActive(true);
-                        isTeleporting = true;
-                        Cursor.visible = true;
-                        Cursor.lockState = CursorLockMode.None;
-                    }
-                }
-                else if (isTeleporting == true) 
-                {
-                    CloseTeleportMenu();
-                }
-            }
-        }
     }
 
 
@@ -51,12 +31,8 @@ public class TeleportHandler : MonoBehaviour
         teleportMenu.SetActive(false);
         Loading.GetComponent<CesiumLoadingScreen>().Show();
         CharacterController cc = player.GetComponent<CharacterController>();
-        if (cc != null) cc.enabled = false;
-
         float newY = transform.position.y;
         player.transform.position = new Vector3(transform.position.x, newY+2, transform.position.z);
-
-        if (cc != null) cc.enabled = true;
 
     }
 

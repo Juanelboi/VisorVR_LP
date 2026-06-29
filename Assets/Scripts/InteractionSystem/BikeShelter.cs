@@ -69,7 +69,7 @@ public class BikeShelter : MonoBehaviour, IInteractable
 
         GameObject player = bikeData.player;
 
-        Vector3 playerPos = transform.position;
+        Vector3 playerPos = interactor.transform.position;
         Quaternion playerRot = GetSpawnRot(interactor.transform);
 
         player.transform.SetParent(null, worldPositionStays: true);
